@@ -5,8 +5,13 @@
                 <small class="text-muted">query: {{ item.query }}</small>
                 <small class="text-muted float-right">{{ item.date }}</small>
             </div>
-            <a :href="item.link" v-html="item.htmlTitle"></a>
-            <p v-html="item.htmlSnippet"></p>
+            <div v-if="item.error">
+                {{ item.error }}
+            </div>
+            <div v-else>
+                <a :href="item.link" v-html="item.htmlTitle"></a>
+                <p v-html="item.htmlSnippet"></p>
+            </div>
         </li>
     </ul>
 </template>

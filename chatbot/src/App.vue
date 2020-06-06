@@ -44,18 +44,24 @@ export default {
   methods: {
     search (query) {
       this.loading = true;
+      this.error = '';
       api.getSearchResults(query)
       .then((res) => {
         const items = res.data.items;
+        let item = {};
+        const date = new Date().toLocaleString('ru');
         if (items && items.length) {
-          const date = new Date().toLocaleString('ru');
-          this.history.push({
-            id: this.history.length,
-            query,
-            date,
-            ...res.data.items[0]
-          });
+          item = res.data.items[0];
+        } else {
+          this.error = 'Nothing found';
+          item.error = this.error;
         }
+        this.history.push({
+          id: this.history.length,
+          query,
+          date,
+          ...item
+        });
       })
       .catch((error) => {
         this.error = error;
