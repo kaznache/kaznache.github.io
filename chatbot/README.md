@@ -6,6 +6,10 @@
 
 Интерфейс отображает всю историю взаимодействия между пользователем и чат-ботом в виде истории переписки.
 
+### Demo
+
+https://kaznache.github.io/chatbot/dist/
+
 ## Project setup
 ```
 npm install
