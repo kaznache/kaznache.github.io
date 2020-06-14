@@ -68,12 +68,10 @@
         for (let i = 0; i < this.itemsCount; i++) {
           const randomIndex = this.getRandom(list.length);
           const item = list[randomIndex];
-          const imageSrc = `https://picsum.photos/id/${item.id}/366/267`;
           items.push({
             ...item,
             loaded: false,
-            src: imageSrc,
-            grayscale_src: `${imageSrc}?grayscale`
+            src: `https://picsum.photos/id/${item.id}/367/267`
           });
         }
         return items;

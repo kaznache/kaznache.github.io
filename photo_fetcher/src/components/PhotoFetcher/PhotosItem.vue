@@ -1,9 +1,9 @@
 <template>
-  <a :href="item.download_url" class="photo">
+  <a :href="downloadUrl" class="photo">
     <spinner v-if="!item.loaded && !error" />
     <div v-else-if="error" class="photo_error text-danger">{{ error }}</div>
 
-    <img :src="item[imageSrc]" :alt="item.author" v-show="item.loaded" @load="imageLoaded" @error="imageFailed">
+    <img :src="imageSrc" :alt="item.author" v-show="item.loaded" @load="imageLoaded" @error="imageFailed">
 
     <div class="photo_descr">
       <div class="photo_title">
@@ -39,9 +39,17 @@ export default {
       error: ''
     };
   },
+  watch: {
+    grayscale () {
+      this.item.loaded = false;
+    }
+  },
   computed: {
+    downloadUrl () {
+      return this.grayscale ? `${this.item.download_url}?grayscale` : this.item.download_url;
+    },
     imageSrc () {
-      return this.grayscale ? 'grayscale_src' : 'src';
+      return this.grayscale ? `${this.item.src}?grayscale` : this.item.src;
     }
   },
   methods: {
@@ -58,7 +66,7 @@ export default {
 <style lang="sass" scoped>
 .photo
   background-color: #eee
-  width: 366px
+  width: 367px
   height: 267px
   overflow: hidden
   position: relative
